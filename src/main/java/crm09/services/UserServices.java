@@ -3,6 +3,7 @@ package crm09.services;
 import java.util.List;
 
 import crm09.entity.Role;
+import crm09.entity.User;
 import crm09.repository.RolesRepository;
 import crm09.repository.UserRepository;
 
@@ -33,5 +34,21 @@ public class UserServices {
 	
 	public boolean insertUser(String email, String password, int roleId, String fullName, String phone) {
 		return userRepository.save(email, password, roleId, fullName, phone) > 0;
+	}
+	
+	public List<User> getAllUser() {
+		return userRepository.findAll();
+	}
+	
+	public User getUser(int id) {
+		return userRepository.get(id);
+	}
+	
+	public boolean updateUser(int id, String email, String password, int idRole, String fullname, String phone) {
+		return userRepository.update(id, email, password, idRole, fullname, phone) > 0;
+	}
+	
+	public boolean deleteUser(int id) {
+		return userRepository.delete(id) > 0;
 	}
 }

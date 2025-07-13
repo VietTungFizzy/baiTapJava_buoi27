@@ -124,7 +124,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới thành viên</h4>
+                        <h4 class="page-title">Thay đổi thông tin thành viên</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -133,30 +133,31 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form action="user-add" method="POST" class="form-horizontal form-material">
+                            <form action="user-change" method="POST" class="form-horizontal form-material">
+                            	<input type="hidden" name="id" value="${user.id}" />
                                 <div class="form-group">
                                     <label class="col-md-12">Full Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="fullname" placeholder="Johnathan Doe"
+                                        <input type="text" value="${user.fullname}" name="fullname" placeholder="Johnathan Doe"
                                             class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="example-email" class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" name="email" placeholder="johnathan@admin.com"
+                                        <input type="email" value="${user.email}" name="email" placeholder="johnathan@admin.com"
                                             class="form-control form-control-line" name="example-email"
                                             id="example-email"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" name="password" value="password" class="form-control form-control-line">
+                                        <input type="password" name="password" value="" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Phone No</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="phone" placeholder="123 456 7890"
+                                        <input type="text" value="${user.phone}" name="phone" placeholder="123 456 7890"
                                             class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
@@ -171,7 +172,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Add User</button>
+                                        <button type="submit" class="btn btn-success">Update User</button>
                                         <a href="/crm09/user" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +16,14 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <!-- animation CSS -->
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -124,61 +126,49 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới thành viên</h4>
+                        <h4 class="page-title">Danh sách thành viên</h4>
                     </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+                        <a href="/crm09/user-add" class="btn btn-sm btn-success">Thêm mới</a>
+                    </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
-                <!-- .row -->
+                <!-- /row -->
                 <div class="row">
-                    <div class="col-md-2 col-12"></div>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-sm-12">
                         <div class="white-box">
-                            <form action="user-add" method="POST" class="form-horizontal form-material">
-                                <div class="form-group">
-                                    <label class="col-md-12">Full Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="fullname" placeholder="Johnathan Doe"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" name="email" placeholder="johnathan@admin.com"
-                                            class="form-control form-control-line" name="example-email"
-                                            id="example-email"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Password</label>
-                                    <div class="col-md-12">
-                                        <input type="password" name="password" value="password" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Phone No</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="phone" placeholder="123 456 7890"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Select Role</label>
-                                    <div class="col-sm-12">
-                                        <select name="roleId" class="form-control form-control-line">
-                                            <c:forEach var="item" items="${listRoles}">
-                                            	<option value="${item.id}" }>${item.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Add User</button>
-                                        <a href="/crm09/user" class="btn btn-primary">Quay lại</a>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="table-responsive">
+                                <table class="table" id="example">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                            <th>Role</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<c:forEach var="user" items="${listUsers}" varStatus="loop">
+                                    		<tr>
+                                    			<td>${loop.index + 1}</td>
+                                    			<td>${user.getFirstname()}</td>
+                                    			<td>${user.getLastname()}</td>
+                                    			<td>@${user.getFirstname()}</td>
+                                    			<td>${user.roles.name}</td>
+                                    			<td>
+	                                                <a href="user-change?id=${user.id}" class="btn btn-sm btn-primary">Sửa</a>
+	                                                <a href="user-delete?id=${user.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="user-details.html" class="btn btn-sm btn-info">Xem</a>
+	                                            </td>
+                                    		</tr>
+                                    	</c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-12"></div>
                 </div>
                 <!-- /.row -->
             </div>
@@ -196,10 +186,16 @@
     <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/jquery.dataTables.js"></script>
     <!--Wave Effects -->
     <script src="js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 
 </html>

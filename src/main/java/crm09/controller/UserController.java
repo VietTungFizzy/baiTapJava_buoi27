@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import crm09.entity.Role;
+import crm09.entity.User;
 import crm09.services.UserServices;
+import crm09.utils.MD5Helper;
 
-@WebServlet(name="UserController", urlPatterns = {"/user-add", "/user"})
+@WebServlet(name="UserController", urlPatterns = {"/user-add", "/user", "/user-change", "/user-delete"})
 public class UserController extends HttpServlet {
 	private UserServices userServices = new UserServices();
 	
@@ -25,7 +27,23 @@ public class UserController extends HttpServlet {
 			
 			req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 		} else if(servletPath.equals("/user")) {
-			req.getRequestDispatcher("user-table.html").forward(req, resp);
+			List<User> listUser = userServices.getAllUser();
+			req.setAttribute("listUsers", listUser);
+			req.getRequestDispatcher("user-table.jsp").forward(req, resp);
+		} else if(servletPath.equals("/user-change")) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			User user = userServices.getUser(id);
+			
+			List<Role> listRole = userServices.getAllRole();
+			req.setAttribute("listRoles", listRole);
+			
+			req.setAttribute("user", user);
+			req.getRequestDispatcher("user-update.jsp").forward(req, resp);
+		} else if(servletPath.equals("/user-delete")) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			
+			boolean isSuccess = userServices.deleteUser(id);
+			resp.sendRedirect("/crm09/user");
 		}
 	}
 	
@@ -36,10 +54,24 @@ public class UserController extends HttpServlet {
 		String password = req.getParameter("password");
 		String phone = req.getParameter("phone");
 		int roleId = Integer.parseInt(req.getParameter("roleId"));
-		System.out.println("Kiem tra " + roleId);
+		boolean isSuccess = false;
 		
-		boolean isSuccess = userServices.insertUser(email, password, roleId, fullName, phone);
+		String servletPath = req.getServletPath();
 		
-		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+		if(servletPath.equals("/user-add")) {
+			isSuccess = userServices.insertUser(email, password, roleId, fullName, phone);
+		} else if(servletPath.equals("/user-change")) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			if(password.isBlank()) {
+				User user = userServices.getUser(id);
+				password = user.getPassword();
+			} else {
+				password = MD5Helper.getMd5(password);
+			}
+			
+			isSuccess = userServices.updateUser(id, email, password, roleId, fullName, phone);
+		}
+		
+		resp.sendRedirect("/crm09/user");
 	}
 }

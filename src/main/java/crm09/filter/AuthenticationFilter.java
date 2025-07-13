@@ -10,7 +10,7 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName= "authentication", urlPatterns= {"/user-add"})
+@WebFilter(filterName= "authentication", urlPatterns= {"/user-add", "/user"})
 public class AuthenticationFilter extends HttpFilter {
 	/**
 	 * Bài tập về nhà:
@@ -27,6 +27,10 @@ public class AuthenticationFilter extends HttpFilter {
 		Cookie[] cookies = req.getCookies();
 		String role = "";
 		
+		if(cookies == null) { 
+			res.sendRedirect("login");
+			return;
+		}
 		for(Cookie cookie : cookies) {
 			String name = cookie.getName();
 			String value = cookie.getValue();
@@ -35,7 +39,10 @@ public class AuthenticationFilter extends HttpFilter {
 			}
 		}
 		
-		if(role.equals("ADMIN")) {
+		String path = req.getServletPath();
+		boolean allowAccessUserAddPage = role.equals("ADMIN") && path.equals("/user-add");
+		boolean allowAccessUserPage = path.equals("/user") && !role.isBlank();
+		if(allowAccessUserAddPage || allowAccessUserPage) {
 			// Cho phép đi tiếp
 			chain.doFilter(req, res);
 		} else {
