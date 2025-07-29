@@ -76,24 +76,26 @@ public class TaskRepository {
 		
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
-			ResultSet resultSet = statement.executeQuery();
 			statement.setInt(1, id);
-			Project project = new Project();
-			project.setId(resultSet.getInt("id_project"));
-			project.setName(resultSet.getString("project_name"));
+			ResultSet resultSet = statement.executeQuery();
 			
-			User user = new User();
-			user.setId(resultSet.getInt("id_user"));
-			user.setFullname(resultSet.getString("user_fullname"));
-			
-			task.setId(resultSet.getInt("id"));
-			task.setNameTask(resultSet.getString("name_task"));
-			task.setStartTask(resultSet.getDate("start_task"));
-			task.setEndTask(resultSet.getDate("end_task"));
-			task.setStatus(resultSet.getString("status"));
-			task.setProject(project);
-			task.setUser(user);
-			
+			while(resultSet.next()) {
+				Project project = new Project();
+				project.setId(resultSet.getInt("id_project"));
+				project.setName(resultSet.getString("project_name"));
+				
+				User user = new User();
+				user.setId(resultSet.getInt("id_user"));
+				user.setFullname(resultSet.getString("user_fullname"));
+				
+				task.setId(resultSet.getInt("id"));
+				task.setNameTask(resultSet.getString("name_task"));
+				task.setStartTask(resultSet.getDate("start_task"));
+				task.setEndTask(resultSet.getDate("end_task"));
+				task.setStatus(resultSet.getString("status"));
+				task.setProject(project);
+				task.setUser(user);
+			}
 		} catch(Exception e) {
 			System.out.println("lỗi get user: " + e.getMessage());
 		}

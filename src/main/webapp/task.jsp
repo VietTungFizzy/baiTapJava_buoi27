@@ -16,12 +16,14 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <!-- animation CSS -->
     <link href="css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="./css/custom.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -104,11 +106,7 @@
                                 aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
                     </li>
                     <li>
-                        <a href="/crm09/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
-                    </li>
-                    <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="/crm09/tasks" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
@@ -124,62 +122,53 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thay đổi thông tin thành viên</h4>
+                        <h4 class="page-title">Danh sách công việc</h4>
                     </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+                        <a href="/crm09/task-add" class="btn btn-sm btn-success">Thêm mới</a>
+                    </div>
+                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
-                <!-- .row -->
+                <!-- /row -->
                 <div class="row">
-                    <div class="col-md-2 col-12"></div>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-sm-12">
                         <div class="white-box">
-                            <form action="user-change" method="POST" class="form-horizontal form-material">
-                            	<input type="hidden" name="id" value="${user.id}" />
-                                <div class="form-group">
-                                    <label class="col-md-12">Full Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" value="${user.fullname}" name="fullname" placeholder="Johnathan Doe"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" value="${user.email}" name="email" placeholder="johnathan@admin.com"
-                                            class="form-control form-control-line" name="example-email"
-                                            id="example-email"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Password</label>
-                                    <div class="col-md-12">
-                                        <input type="password" name="password" value="" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Phone No</label>
-                                    <div class="col-md-12">
-                                        <input type="text" value="${user.phone}" name="phone" placeholder="123 456 7890"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Select Role</label>
-                                    <div class="col-sm-12">
-                                        <select name="roleId" class="form-control form-control-line">
-                                            <c:forEach var="item" items="${listRoles}">
-                                            	<option value="${item.id}" }>${item.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Update User</button>
-                                        <a href="/crm09/user" class="btn btn-primary">Quay lại</a>
-                                    </div>
-                                </div>
-                            </form>
+                            <div class="table-responsive">
+                                <table class="table" id="example">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên Công Việc</th>
+                                            <th>Dự Án</th>
+                                            <th>Người Thực Hiện</th>
+                                            <th>Ngày Bắt Đầu</th>
+                                            <th>Ngày Kết Thúc</th>
+                                            <th>Trạng Thái</th>
+                                            <th>Hành Động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<c:forEach var="task" items="${listTasks}" varStatus="loop">
+                                    		<tr>
+	                                    		<td>${loop.index + 1}</td>
+	                                    		<td>${task.nameTask}</td>
+	                                    		<td>${task.project.name}</td>
+	                                    		<td>${task.user.fullname }</td>
+	                                    		<td>${task.startTask != null ? formatter.format(task.startTask) : ""}</td>
+	                                    		<td>${task.endTask != null ? formatter.format(task.endTask) : ""}</td>
+	                                    		<td>${task.status}</td>
+	                                    		<td>
+	                                                <a href="/crm09/task-change?id=${task.id}" class="btn btn-sm btn-primary">Sửa</a>
+	                                                <a href="/crm09/task-delete?id=${task.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="#" class="btn btn-sm btn-info">Xem</a>
+	                                            </td>
+                                            </tr>
+                                    	</c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-12"></div>
                 </div>
                 <!-- /.row -->
             </div>
@@ -197,10 +186,16 @@
     <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <!--Wave Effects -->
     <script src="js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
 </body>
 
 </html>

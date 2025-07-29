@@ -38,51 +38,53 @@
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
-                <div class="navbar-header"> 
-                    <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
-                        <i class="fa fa-bars"></i>
+            <div class="navbar-header">
+                <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <div class="top-left-part">
+                    <a class="logo" href="index.html">
+                        <b>
+                            <img src="plugins/images/pixeladmin-logo.png" alt="home" />
+                        </b>
+                        <span class="hidden-xs">
+                            <img src="plugins/images/pixeladmin-text.png" alt="home" />
+                        </span>
                     </a>
-                    <div class="top-left-part">
-                        <a class="logo" href="index.html">
-                            <b>
-                                <img src="plugins/images/pixeladmin-logo.png" alt="home" />
-                            </b>
-                            <span class="hidden-xs">
-                                <img src="plugins/images/pixeladmin-text.png" alt="home" />
-                            </span>
-                        </a>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
-                        <li>
-                            <form role="search" class="app-search hidden-xs">
-                                <input type="text" placeholder="Search..." class="form-control"> 
-                                <a href="">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-top-links navbar-right pull-right">
-                        <li>
-                            <div class="dropdown">
-                                <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
-                                    <b class="hidden-xs">Cybersoft</b> 
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="profile.html">Thông tin cá nhân</a></li>
-                                    <li><a href="#">Thống kê công việc</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Đăng xuất</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
-                <!-- /.navbar-header -->
-                <!-- /.navbar-top-links -->
-                <!-- /.navbar-static-side -->
-            </nav>
+                <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
+                    <li>
+                        <form role="search" class="app-search hidden-xs">
+                            <input type="text" placeholder="Search..." class="form-control">
+                            <a href="">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </form>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li>
+                        <div class="dropdown">
+                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                    class="img-circle" />
+                                <b class="hidden-xs">Cybersoft</b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                <li><a href="#">Thống kê công việc</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
         <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
@@ -124,7 +126,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thay đổi thông tin thành viên</h4>
+                        <h4 class="page-title">Thêm mới công việc</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -133,47 +135,52 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form action="user-change" method="POST" class="form-horizontal form-material">
-                            	<input type="hidden" name="id" value="${user.id}" />
+                            <form action="task-add" method="POST" class="form-horizontal form-material">
                                 <div class="form-group">
-                                    <label class="col-md-12">Full Name</label>
+                                    <label class="col-md-12">Dự án</label>
                                     <div class="col-md-12">
-                                        <input type="text" value="${user.fullname}" name="fullname" placeholder="Johnathan Doe"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" value="${user.email}" name="email" placeholder="johnathan@admin.com"
-                                            class="form-control form-control-line" name="example-email"
-                                            id="example-email"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Password</label>
-                                    <div class="col-md-12">
-                                        <input type="password" name="password" value="" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Phone No</label>
-                                    <div class="col-md-12">
-                                        <input type="text" value="${user.phone}" name="phone" placeholder="123 456 7890"
-                                            class="form-control form-control-line"> </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Select Role</label>
-                                    <div class="col-sm-12">
-                                        <select name="roleId" class="form-control form-control-line">
-                                            <c:forEach var="item" items="${listRoles}">
-                                            	<option value="${item.id}" }>${item.name}</option>
+                                        <select name="project" class="form-control form-control-line">
+                                            <c:forEach var="project" items="${listProjects}">
+                                            	<option value="${project.id}">${project.name}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-12">Tên công việc</label>
+                                    <div class="col-md-12">
+                                        <input name="nameTask" type="text" placeholder="Tên công việc"
+                                            class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Người thực hiện</label>
+                                    <div class="col-md-12">
+                                        <select name="user" class="form-control form-control-line">
+                                            <c:forEach var="user" items="${listUsers}">
+                                            	<option value="${user.id}">${user.fullname}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <div class="col-md-12">
+                                        <input name="startTask" type="text" placeholder="dd/MM/yyyy"
+                                            class="form-control form-control-line"> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Ngày kết thúc</label>
+                                    <div class="col-md-12">
+                                        <input name="endTask" type="text" placeholder="dd/MM/yyyy"
+                                            class="form-control form-control-line"> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Update User</button>
-                                        <a href="/crm09/user" class="btn btn-primary">Quay lại</a>
+                                        <button type="submit" class="btn btn-success">Lưu lại</button>
+                                        <a href="/crm09/tasks" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>
