@@ -72,7 +72,7 @@
                                     <b class="hidden-xs">Cybersoft</b> 
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                    <li><a href="/crm09/profile?id=${currentUserId}">Thông tin cá nhân</a></li>
                                     <li><a href="#">Thống kê công việc</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Đăng xuất</a></li>
@@ -106,7 +106,11 @@
                                 aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
                     </li>
                     <li>
-                        <a href="/crm09/tasks" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="/crm09/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
+                    </li>
+                    <li>
+                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
@@ -156,7 +160,7 @@
 	                                    		<td>${task.user.fullname }</td>
 	                                    		<td>${task.startTask != null ? formatter.format(task.startTask) : ""}</td>
 	                                    		<td>${task.endTask != null ? formatter.format(task.endTask) : ""}</td>
-	                                    		<td>${task.status}</td>
+	                                    		<td>${task.status.name}</td>
 	                                    		<td>
 	                                                <a href="/crm09/task-change?id=${task.id}" class="btn btn-sm btn-primary">Sửa</a>
 	                                                <a href="/crm09/task-delete?id=${task.id}" class="btn btn-sm btn-danger">Xóa</a>

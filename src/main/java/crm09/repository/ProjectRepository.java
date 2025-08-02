@@ -12,7 +12,9 @@ import crm09.entity.Project;
 
 public class ProjectRepository {
 	public List<Project> findAll() {
-		String query = "SELECT * FROM projects";
+		String query = "SELECT p.*, s.name as status \n"
+				+ "FROM projects p\n"
+				+ "JOIN status s ON p.id_status = s.id";
 		Connection connection = MySQLConfig.getConnection();
 		List<Project> listProjects = new ArrayList<Project>();
 		
@@ -38,7 +40,10 @@ public class ProjectRepository {
 	}
 	
 	public Project get(int id) {
-		String query = "SELECT * FROM projects p WHERE p.id = ?";
+		String query = "SELECT p.*, s.name as status \n"
+				+ "FROM projects p\n"
+				+ "JOIN status s ON p.id_status = s.id\n"
+				+ "WHERE p.id = ?";
 		Connection connection = MySQLConfig.getConnection();
 		Project project = new Project();
 		

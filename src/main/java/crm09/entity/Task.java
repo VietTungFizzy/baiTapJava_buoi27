@@ -7,10 +7,17 @@ public class Task {
 	private String nameTask;
 	private Date startTask;
 	private Date endTask;
-	private String status;
+//	private String status;
 	private Project project;
 	private User user;
+	private Status status;
 
+	public Status getStatus() {
+		return status;
+	}
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 	public int getId() {
 		return id;
 	}
@@ -35,12 +42,7 @@ public class Task {
 	public void setEndTask(Date end_task) {
 		this.endTask = end_task;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public Project getProject() {
 		return project;
 	}
@@ -52,5 +54,9 @@ public class Task {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public int getStatusId() {
+		return this.status.getId();
 	}
 }

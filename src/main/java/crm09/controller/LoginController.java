@@ -109,10 +109,12 @@ public class LoginController extends HttpServlet {
 				String roleName = listUsers.get(0).getRoles().getName();
 				
 				Cookie cookieRole = new Cookie("role", roleName);
+				Cookie cookieId = new Cookie("id", String.valueOf(listUsers.getFirst().getId()));
 				
 				resp.addCookie(cookieRole);
 				resp.addCookie(cookie);
 				resp.addCookie(cookiePassword);
+				resp.addCookie(cookieId);
 				
 				System.out.println("Đăng nhập thành công");
 			} else {

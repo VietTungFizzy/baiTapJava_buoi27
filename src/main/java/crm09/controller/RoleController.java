@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,22 @@ public class RoleController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int currentUserId = -1;
+		Cookie[] cookies = req.getCookies();
+		if(req.getCookies() != null) {
+			cookies = req.getCookies();
+			
+			for(Cookie cookie: cookies) {
+				String name = cookie.getName();
+				String value = cookie.getValue();
+				
+				if(name.equals("id")) {
+					currentUserId = Integer.parseInt(value);
+				}
+			}
+		}
+		req.setAttribute("currentUserId", currentUserId);
+		
 		String servletPath = req.getServletPath();
 		if(servletPath.equals("/roles")) {
 			List<Role> roles = userService.getAllRole();

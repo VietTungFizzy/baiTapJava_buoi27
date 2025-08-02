@@ -72,7 +72,7 @@
                                     <b class="hidden-xs">Cybersoft</b> 
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                    <li><a href="/crm09/profile?id=${currentUserId}">Thông tin cá nhân</a></li>
                                     <li><a href="#">Thống kê công việc</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Đăng xuất</a></li>
@@ -160,7 +160,7 @@
                                     			<td>
 	                                                <a href="user-change?id=${user.id}" class="btn btn-sm btn-primary">Sửa</a>
 	                                                <a href="user-delete?id=${user.id}" class="btn btn-sm btn-danger">Xóa</a>
-	                                                <a href="user-details.html" class="btn btn-sm btn-info">Xem</a>
+	                                                <a href="user-details?id=${user.id}" class="btn btn-sm btn-info">Xem</a>
 	                                            </td>
                                     		</tr>
                                     	</c:forEach>
